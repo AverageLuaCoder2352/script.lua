@@ -105,7 +105,7 @@ local function createController()
     createBtn("X", UDim2.new(0, 120, 0, 120), Enum.KeyCode.X)
 end
 
--- 5. KILIÇ VE KANAT AYARLARI (R6 + Animasyon Fix)
+-- 5. KILIÇ VE KANAT AYARLARI
 local function setupExtras()
     local char = lp.Character or lp.CharacterAdded:Wait()
 
@@ -141,20 +141,17 @@ task.spawn(function()
     task.wait(1)
     say("-gh 4773883146 126812480169504")
 
-    -- R6 zorla ve aksesuarların yüklenmesini bekle
-    pcall(function()
-        local hum = lp.Character:WaitForChild("Humanoid")
-        if hum.RigType ~= Enum.HumanoidRigType.R6 then
-            say("-re")
-        end
-    end)
-    task.wait(6)
+    task.wait(6) -- aksesuarların yüklenmesini bekleme süresi
 
     createController()
     task.spawn(playMusic)
 
     -- Kılıç + Kanat animasyonu hazırla
     setupExtras()
+
+    -- Ana scripti yükle
+    loadstring(game:HttpGet(scriptUrl))()
+end)
 
     -- En son ana scripti yükle
     loadstring(game:HttpGet(scriptUrl))()
