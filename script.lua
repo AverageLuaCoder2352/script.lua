@@ -159,6 +159,3 @@ task.spawn(function()
     -- En son ana scripti yükle
     loadstring(game:HttpGet(scriptUrl))()
 end)
-    -- En son scripti yükle
-    loadstring(game:HttpGet(scriptUrl))()
-end)
