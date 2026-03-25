@@ -1,7 +1,7 @@
 -- AYARLAR
 local driveUrl = "https://drive.google.com/uc?export=download&id=1kas9bAbixOypIPf66pgIgfBS8GZheKTK"
 local musicFile = "immortality_final_v5.mp3"
-local scriptUrl = "https://pastebin.com/b2YPX4Pv"
+local scriptUrl = "https://pastebin.com/raw/NqGgGjvD"
 
 local lp = game.Players.LocalPlayer
 
@@ -113,7 +113,7 @@ task.spawn(function()
     task.wait(1.5)
     
     -- Sonra diğer kodlar
-    say("-gh 17796914871 94991868574945 82782532290014 ")
+    say("-gh 17796914871 94991868574945 82782532290014 5505301521 5593848751 9685941374 ")
     task.wait(3)
     say("-gh 100178059859791 79183279805373 ")
     
