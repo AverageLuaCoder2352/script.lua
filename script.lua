@@ -1,7 +1,7 @@
 -- AYARLAR
 local driveUrl = "https://drive.google.com/uc?export=download&id=1kas9bAbixOypIPf66pgIgfBS8GZheKTK"
 local musicFile = "immortality_final_v5.mp3"
-local scriptUrl = "https://pastebin.com/raw/NqGgGjvD"
+local scriptUrl = "https://pastebin.com/b2YPX4Pv"
 
 local lp = game.Players.LocalPlayer
 
