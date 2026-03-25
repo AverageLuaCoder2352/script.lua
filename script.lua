@@ -109,13 +109,13 @@ end
 -- 5. SIRALI AKIŞ (YENİ GİRİŞ MESAJI DAHİL)
 task.spawn(function()
     -- Önce senin istediğin o özel giriş mesajı
-    say("By oldhacfard / immortaliy lord")
+    say("By EmpressCyc/ Golden boi")
     task.wait(1.5)
     
     -- Sonra diğer kodlar
-    say("-gh 9685941374 5593848751 5505301521")
+    say("-gh 17796914871 94991868574945 82782532290014")
     task.wait(1)
-    say("-gh 13395210079 13629432438")
+    say("-gh 4773883146 126812480169504")
     
     task.wait(4) -- 4 saniye bekleme
     
