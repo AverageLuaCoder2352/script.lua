@@ -113,9 +113,9 @@ task.spawn(function()
     task.wait(1.5)
     
     -- Sonra diğer kodlar
-    say("-gh 17796914871 94991868574945 82782532290014")
+    say("-gh 17796914871 94991868574945 82782532290014 16242923252")
     task.wait(3)
-    say("-gh 4773883146 126812480169504")
+    say("-gh 100178059859791 16176760430")
     
     task.wait(4) -- 4 saniye bekleme
     
