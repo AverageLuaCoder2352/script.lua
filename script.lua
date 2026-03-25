@@ -5,7 +5,7 @@ local scriptUrl = "https://pastebin.com/raw/NqGgGjvD"
 
 local lp = game.Players.LocalPlayer
 
--- 1. KONUŞMA FONKSİYONU (Her iki chat sürümüyle uyumlu)
+-- 1. KONUŞMA FONKSİYONU
 local function say(msg)
     pcall(function()
         local TextChatService = game:GetService("TextChatService")
@@ -18,7 +18,7 @@ local function say(msg)
     end)
 end
 
--- 2. GÖRSEL "UI" PANELİ
+-- 2. UI PANELİ
 local function createImmortalityUI()
     local pg = lp:WaitForChild("PlayerGui")
     if pg:FindFirstChild("LordUI") then pg.LordUI:Destroy() end
@@ -37,7 +37,6 @@ local function createImmortalityUI()
     textLabel.Font = Enum.Font.SpecialElite
     textLabel.TextSize = 28
     textLabel.Visible = false 
-    
     Instance.new("UICorner", textLabel).CornerRadius = UDim.new(0, 12)
     return textLabel
 end
@@ -51,7 +50,7 @@ local function showUI(customText)
     lordLabel.Visible = false
 end
 
--- 3. SADECE SENİN MESAJLARINI DİNLEYEN SİSTEM
+-- 3. SADECE SENİN MESAJLARINI DİNLE
 game:GetService("TextChatService").OnIncomingMessage = function(message)
     if message.TextSource and message.TextSource.UserId == lp.UserId then
         local words = string.split(message.Text, " ")
@@ -106,29 +105,60 @@ local function createController()
     createBtn("X", UDim2.new(0, 120, 0, 120), Enum.KeyCode.X)
 end
 
--- 5. SIRALI AKIŞ (YENİ GİRİŞ MESAJI DAHİL)
+-- 5. KILIÇ VE KANAT AYARLARI (R6 + Animasyon Fix)
+local function setupExtras()
+    local char = lp.Character or lp.CharacterAdded:Wait()
+
+    -- Kılıç eline almayı F tuşuna bağla
+    local sword = char:FindFirstChild("CoolSword") -- Yeni kılıç adı
+    local rightHand = char:WaitForChild("RightHand")
+    if sword then
+        local weld = Instance.new("Weld")
+        weld.Part0 = rightHand
+        weld.Part1 = sword:FindFirstChild("Handle") or sword.Handle
+        weld.C0 = CFrame.new(0, 0, 0) * CFrame.Angles(0, math.rad(90), 0)
+        weld.Parent = rightHand
+    end
+
+    -- Kanatlar için flap animasyonu
+    local wings = char:FindFirstChild("DarkWings") -- Yeni kanat adı
+    if wings then
+        game:GetService("RunService").RenderStepped:Connect(function()
+            local t = tick()
+            if wings:FindFirstChild("Handle") then
+                wings.Handle.CFrame = wings.Handle.CFrame * CFrame.Angles(0, math.sin(t*5)*0.1, 0)
+            end
+        end)
+    end
+end
+
+-- 6. ANA AKIŞ
 task.spawn(function()
-    -- Önce senin istediğin o özel giriş mesajı
-    say("By EmpressCyc/ Golden boi")
+    say("By EmpressCyc / Golden boi")
     task.wait(1.5)
-    
-    -- Sonra diğer kodlar
+
     say("-gh 17796914871 94991868574945 82782532290014")
     task.wait(1)
     say("-gh 4773883146 126812480169504")
-    
-    -- R6 zorla
-pcall(function()
-    local hum = lp.Character:WaitForChild("Humanoid")
-    if hum.RigType ~= Enum.HumanoidRigType.R6 then
-        say("-re") -- reanimate için
-    end
-end)
 
-task.wait(6) -- aksesuarların yüklenmesini bekle
+    -- R6 zorla ve aksesuarların yüklenmesini bekle
+    pcall(function()
+        local hum = lp.Character:WaitForChild("Humanoid")
+        if hum.RigType ~= Enum.HumanoidRigType.R6 then
+            say("-re")
+        end
+    end)
+    task.wait(6)
+
     createController()
     task.spawn(playMusic)
-    
+
+    -- Kılıç + Kanat animasyonu hazırla
+    setupExtras()
+
+    -- En son ana scripti yükle
+    loadstring(game:HttpGet(scriptUrl))()
+end)
     -- En son scripti yükle
     loadstring(game:HttpGet(scriptUrl))()
 end)
