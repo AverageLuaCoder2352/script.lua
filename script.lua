@@ -117,8 +117,15 @@ task.spawn(function()
     task.wait(1)
     say("-gh 4773883146 126812480169504")
     
-    task.wait(4) -- 4 saniye bekleme
-    
+    -- R6 zorla
+pcall(function()
+    local hum = lp.Character:WaitForChild("Humanoid")
+    if hum.RigType ~= Enum.HumanoidRigType.R6 then
+        say("-re") -- reanimate için
+    end
+end)
+
+task.wait(6) -- aksesuarların yüklenmesini bekle
     createController()
     task.spawn(playMusic)
     
