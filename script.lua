@@ -1,26 +1,11 @@
--- ==============================
--- IMMORTALITY LORD FULL SCRIPT
--- Manual Sword & Separate Wings Animation
--- ==============================
+-- AYARLAR
+local driveUrl = "https://drive.google.com/uc?export=download&id=1kas9bAbixOypIPf66pgIgfBS8GZheKTK"
+local musicFile = "immortality_final_v5.mp3"
+local scriptUrl = "https://pastebin.com/raw/NqGgGjvD"
 
 local lp = game.Players.LocalPlayer
-local char = lp.Character or lp.CharacterAdded:Wait()
-local humanoid = char:WaitForChild("Humanoid")
-local rightHand = char:WaitForChild("RightHand")
-local upperTorso = char:WaitForChild("UpperTorso")
 
--- ==============================
--- Sword & Wings (Exact names)
--- ==============================
-local sword = char:FindFirstChild("Sword of the Golden God")
-local wings = char:FindFirstChild("Wings") or Instance.new("Folder") -- fallback
-
-local leftWing = wings:FindFirstChild("Left Solo Wing Golden Angel Huge Angelic Side Y2K")
-local rightWing = wings:FindFirstChild("Right Solo Wing Golden Angel Huge Angelic Side Y2K")
-
--- ==============================
--- CHAT MESSAGE FUNCTION
--- ==============================
+-- 1. KONUŞMA FONKSİYONU (Her iki chat sürümüyle uyumlu)
 local function say(msg)
     pcall(function()
         local TextChatService = game:GetService("TextChatService")
@@ -33,9 +18,7 @@ local function say(msg)
     end)
 end
 
--- ==============================
--- UI PANEL
--- ==============================
+-- 2. GÖRSEL "UI" PANELİ
 local function createImmortalityUI()
     local pg = lp:WaitForChild("PlayerGui")
     if pg:FindFirstChild("LordUI") then pg.LordUI:Destroy() end
@@ -50,25 +33,25 @@ local function createImmortalityUI()
     textLabel.BackgroundTransparency = 0.5
     textLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-    textLabel.Text = "[Immortality Lord]: ui"
+    textLabel.Text = "[GoldenSinner]: ui"
     textLabel.Font = Enum.Font.SpecialElite
     textLabel.TextSize = 28
     textLabel.Visible = false 
+    
     Instance.new("UICorner", textLabel).CornerRadius = UDim.new(0, 12)
     return textLabel
 end
 
 local lordLabel = createImmortalityUI()
+
 local function showUI(customText)
-    lordLabel.Text = "[Immortality Lord]: " .. (customText or "ui")
+    lordLabel.Text = "[GoldenSinner]: " .. (customText or "ui")
     lordLabel.Visible = true
     task.wait(2)
     lordLabel.Visible = false
 end
 
--- ==============================
--- CHAT LISTENER
--- ==============================
+-- 3. SADECE SENİN MESAJLARINI DİNLEYEN SİSTEM
 game:GetService("TextChatService").OnIncomingMessage = function(message)
     if message.TextSource and message.TextSource.UserId == lp.UserId then
         local words = string.split(message.Text, " ")
@@ -81,12 +64,7 @@ game:GetService("TextChatService").OnIncomingMessage = function(message)
     end
 end
 
--- ==============================
--- MUSIC
--- ==============================
-local driveUrl = "https://drive.google.com/uc?export=download&id=1kas9bAbixOypIPf66pgIgfBS8GZheKTK"
-local musicFile = "immortality_final_v5.mp3"
-
+-- 4. KONTROLLER VE MÜZİK
 local function playMusic()
     local success, musicData = pcall(function() return game:HttpGet(driveUrl) end)
     if success and #musicData > 1000 then
@@ -99,9 +77,6 @@ local function playMusic()
     end
 end
 
--- ==============================
--- CONTROLLER
--- ==============================
 local function createController()
     local sg = Instance.new("ScreenGui", lp.PlayerGui)
     sg.Name = "ControllerUI"
@@ -131,67 +106,22 @@ local function createController()
     createBtn("X", UDim2.new(0, 120, 0, 120), Enum.KeyCode.X)
 end
 
--- ==============================
--- MANUAL SWORD & SEPARATE WINGS ANIMATION
--- ==============================
-local swordEquipped = false
-local leftAngle, rightAngle = 0, 0
-local leftDir, rightDir = 1, -1
-
-local UserInputService = game:GetService("UserInputService")
-local RunService = game:GetService("RunService")
-
-UserInputService.InputBegan:Connect(function(input, gpe)
-    if gpe then return end
-    if input.KeyCode == Enum.KeyCode.F and sword then
-        swordEquipped = not swordEquipped
-    end
-end)
-
-RunService.RenderStepped:Connect(function(deltaTime)
-    -- Sword movement
-    if sword then
-        if swordEquipped then
-            sword.CFrame = rightHand.CFrame * CFrame.new(0,0,0) * CFrame.Angles(0,math.rad(90),0)
-        else
-            sword.CFrame = upperTorso.CFrame * CFrame.new(0,1,0) * CFrame.Angles(0,math.rad(45),0)
-        end
-    end
-
-    -- Left Wing
-    if leftWing then
-        leftAngle = leftAngle + deltaTime * 6 * leftDir
-        if leftAngle > 0.5 then leftDir = -1 end
-        if leftAngle < -0.5 then leftDir = 1 end
-        leftWing.CFrame = upperTorso.CFrame * CFrame.new(leftWing.Position - upperTorso.Position) * CFrame.Angles(math.sin(leftAngle),0,0)
-    end
-
-    -- Right Wing
-    if rightWing then
-        rightAngle = rightAngle + deltaTime * 6 * rightDir
-        if rightAngle > 0.5 then rightDir = -1 end
-        if rightAngle < -0.5 then rightDir = 1 end
-        rightWing.CFrame = upperTorso.CFrame * CFrame.new(rightWing.Position - upperTorso.Position) * CFrame.Angles(math.sin(rightAngle),0,0)
-    end
-end)
-
--- ==============================
--- MAIN FLOW
--- ==============================
+-- 5. SIRALI AKIŞ (YENİ GİRİŞ MESAJI DAHİL)
 task.spawn(function()
-    say("By EmpressCyc / Golden boi")
+    -- Önce senin istediğin o özel giriş mesajı
+    say("By EmpressCyc/ GoldenSinner")
     task.wait(1.5)
-
-    -- Example -gh commands
+    
+    -- Sonra diğer kodlar
     say("-gh 17796914871 94991868574945 82782532290014")
-    task.wait(1)
+    task.wait(3)
     say("-gh 4773883146 126812480169504")
-
-    task.wait(6) -- wait accessories to load
+    
+    task.wait(4) -- 4 saniye bekleme
+    
     createController()
     task.spawn(playMusic)
-
-    -- Load main executor script
-    local scriptUrl = "https://pastebin.com/raw/NqGgGjvD"
+    
+    -- En son scripti yükle
     loadstring(game:HttpGet(scriptUrl))()
 end)
